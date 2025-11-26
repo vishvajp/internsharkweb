@@ -1,0 +1,51 @@
+.connectingstudent{
+    background-color: gainsboro;
+    border-radius: 176px 0 176px 0;
+     position: relative;
+     margin-top: 10%;
+}
+.connecticons{
+   width: 65px;
+}
+    
+.for-inter{
+    background-color: #01cdcd;
+    padding: 9px;
+    border-radius: 17px;
+    justify-content: space-evenly;
+}
+.for-recruiter{
+    background-color: #0744c5;
+    padding: 9px;
+    border-radius: 17px;
+    justify-content: space-evenly;
+}
+.employephoto {
+  width: 50px;
+  height: auto;
+}
+.inter-text{
+    color: white;
+}
+.inter-textone{
+    color: white;
+    font-size: 24px
+}
+.student-img {
+    position: absolute;
+    bottom: 0;
+    left: 8%;
+    width: 100%;
+    max-width: 29%;
+}
+.translate-top {
+  transform: translateY(-78px);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+@media screen and (max-width: 990px) {
+  .student-img {
+    display: none !important;
+  }
+}

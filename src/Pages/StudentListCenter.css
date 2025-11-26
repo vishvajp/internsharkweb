@@ -1,0 +1,30 @@
+.studentcard {
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
+}
+.studentcard:hover {
+  transform: translateY(-5px);
+  cursor: pointer;
+}
+.roletext {
+  color: #17a2b8; /* or keep aqua if you like */
+}
+.studentimage-wrapper {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  padding: 10px;
+  display: inline-block;
+}
+.studentimage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.centerjobshowboxouter {
+  min-height: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+}

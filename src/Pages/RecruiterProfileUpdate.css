@@ -1,0 +1,11 @@
+.recruiterprofiledetailbackground {
+  background-image: url("../Images//Discover\ Icon\ 3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh; /* Ensures it takes full screen height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,0 +1,10 @@
+.jobpostshowcard{
+    background-color: var(--primary-color-three);
+}
+
+.transition-transform {
+  transition: transform 0.2s ease;
+}
+.rotate-180 {
+  transform: rotate(180deg);
+}

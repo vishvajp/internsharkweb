@@ -1,0 +1,239 @@
+.topimageabout {
+  width: 100%;
+  height: 400px; /* adjust height as needed */
+  overflow: hidden;
+}
+
+.topimageaboutuspage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills and crops if needed */
+  display: block;
+}
+.yellowdot {
+ width: 32px;
+    height: 2px;
+    background-color: #fbc531;
+}
+/* .missionbox{
+    background-color: #01cdcd;
+    
+    width: 100%;
+    border-radius: 110px 30px 30px 30px;
+}
+.ourvision{
+     background-color: #0744c5;
+    
+    width: 100%;
+    border-radius: 30px 110px 30px 30px;
+} */
+.exploreintern{
+    background-color: #01cdcd;
+    position: relative;
+  /* background: linear-gradient(to bottom, #c3e6ec, #a7d1d9); */
+    transition: transform 0.2s ease;
+    width: 100%;
+    border-radius: 70px 20px 70px 20px;
+    transition: all 0.5s ease;
+  overflow: hidden;
+  z-index: 0;
+  /* max-height: 320px; */
+}
+.exploreintern::before {
+  content: '';
+  position: absolute;
+  /* top: -16px;
+  right: -16px; */
+  height: 32px;
+  width: 32px;
+  background: linear-gradient(135deg, #0744c5,#0744c5);
+  border-radius: 100px;
+  z-index: -1;
+  transform: scale(1);
+  transition: transform 0.35s ease-out;
+}
+
+.exploreintern:hover::before {
+  transform: scale(28);
+}
+
+.exploreintern:hover .card-title,
+.exploreintern:hover .card-desc {
+  color: #fff;
+  transition: all 0.5s ease-out;
+}
+
+
+
+.interimageouter{
+    width: 100px;
+}
+
+
+
+/* .exploreintern:hover {
+  transform: translateY(-5px);
+  
+} */
+
+.interimageouter {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interimage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-width: 200px; 
+}
+
+.signuptextheightfix{
+    min-height: 50px;
+}
+
+.how-it-works-title {
+  color: var(--primary-color);
+}
+
+.howworkiconouter{
+  background-color: var(--yellow-color-);
+  min-height: 162px;
+  min-width: 162px;
+  border-radius: 90px 90px 166px 90px;
+}
+
+.howworkicons{
+  width: 100px;
+  
+  
+}
+
+.Illustrationimage{
+  object-fit: contain;
+  width: 100%;
+}
+
+
+
+
+.top-circle-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Left image for Our Mission */
+.image-wrapper-left {
+  position: absolute;
+  top: -40px;
+  left: 80px;
+  z-index: 2;
+}
+
+/* Right image for Our Vision */
+.image-wrapper-right {
+  position: absolute;
+  top: -40px;
+  right: 65px;
+  z-index: 2;
+}
+
+.missionbox {
+  background-color: #01cdcd;
+  width: 100%;
+  border-radius: 110px 30px 30px 30px;
+  padding-top: 4rem;
+  position: relative;
+}
+
+.ourvision {
+  background-color: #0744c5;
+  width: 100%;
+  border-radius: 30px 110px 30px 30px;
+  padding-top: 4rem;
+  position: relative;
+}
+
+.footercompanylogorowbox{
+  background-color: var(--graylightshadow-);
+}
+
+.footerlogoouterbackground {
+  background-color: var(--text-light);
+  width: 200px;
+  height: 170px;
+  border-radius: 50%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.how-it-works-hover-wrapper {
+  transition: transform 0.3s ease;
+}
+
+.how-it-works-hover-wrapper:hover {
+  transform: translateY(-20px);
+}
+
+.missionbox:hover{
+  border: 1px solid var(--graylightshadow-);
+    transform: scale(1.05);
+
+}
+
+.missionbox:active{
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+.ourvision:hover{
+  border: 1px solid var(--graylightshadow-);
+    transform: scale(1.05);
+}
+
+.ourvision:active{
+  transform: scale(0.95) rotateZ(1.7deg);
+}
+
+
+
+/* media queries */
+
+@media screen and (max-width: 982px) {
+
+}
+
+@media screen and (max-width: 768px) {
+   .footerlogoouterbackground {
+    background-color: var(--text-light);
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+}
+
+
+@media screen and (max-width: 532px) {
+  .howworkiconouter {
+    background-color: var(--yellow-color-);
+    min-height: 132px;
+    min-width: 163px;
+    border-radius: 90px 90px 166px 90px;
+}
+
+}

@@ -1,0 +1,25 @@
+.student-detail-container {
+  max-width: 960px;
+  /* box-shadow: 0 4px 16px rgba(1, 205, 205, 0.7); */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.student-section {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 1.5rem 2rem;
+}
+/* .studentdetailbackground{
+  background-image: url(../Images//studentdetailbackground.jpg);
+} */
+
+.student-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}

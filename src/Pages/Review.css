@@ -1,0 +1,31 @@
+.reviewer-col {
+  min-height: 100%; /* Ensures equal height columns if needed */
+}
+
+.image-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 150px;
+}
+
+.student-review-img {
+  width: 50%;
+  max-width: 207px;
+  height: auto;
+  object-fit: contain;
+  position: absolute;
+  bottom: 0;
+}
+.social-icons svg {
+  font-size: 24px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.social-icons svg:hover {
+  transform: scale(1.1);
+  color: black; /* Optional: change color on hover */
+}

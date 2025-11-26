@@ -1,0 +1,24 @@
+.logofooter {
+    width: 80px;
+    height: 88px;
+}
+
+.footertwo {
+  width: 100%;
+  background-color: #ffde5f;
+
+  text-align: center;
+}
+
+.footerone{
+     background-color: #119e9e;
+}
+
+.footertext{
+    color: white;
+}
+
+.mail-icon{
+  color: #ffde5f;
+  font-size: 30px;
+}

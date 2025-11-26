@@ -1,0 +1,67 @@
+body {
+  background-color: #f8f9fa; /* subtle light background */
+}
+.mobilenumberboxdivider{
+    display: flex;
+    gap: 8px;
+}
+.mobilnumberinputprofile{
+    height: 48px;
+    flex: 1;
+}
+.profileinputrows{
+    width: 60%;
+    margin: auto;
+}
+.sentotpprobox{
+    height: 48px;
+}
+.otpsmallboxs{
+  width: 100%;
+  height: 48px;
+  letter-spacing: 0.5rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+.container {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+input:focus, .ant-input:focus, .ant-input-affix-wrapper-focused {
+  border-color: #0d6efd !important;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25) !important;
+  outline: none;
+}
+
+label {
+  font-size: 1rem;
+}
+
+button.btn-primary {
+  transition: background-color 0.3s ease;
+}
+
+button.btn-primary:hover {
+  background-color: #0b5ed7;
+}
+.custom-modal .modal-content {
+  border-radius: 0.75rem;
+}
+
+@media (max-width: 576px) {
+  .custom-modal .modal-body {
+    padding: 1rem;
+  }
+  .custom-modal .modal-footer {
+    padding: 0.75rem 1rem;
+  }
+}
+
+
+

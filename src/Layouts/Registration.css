@@ -1,0 +1,61 @@
+
+
+.custom-modal .modal-content {
+  background-color: #0744c5;
+  color: white; 
+  border-radius: 12px; 
+ 
+  
+}
+
+
+.custom-modal .modal-header {
+  border-bottom: none;
+}
+
+.custom-modal .modal-footer {
+  border-top: none;
+}
+
+.modal-title-custom {
+  color: #01cdcd;
+  font-weight: 700;
+  font-size: large;
+}
+
+.modal-title-custom span {
+  display: block;  /* makes span text appear on the next line */
+  color: white;
+  font-weight: normal;
+  margin-top: 4px;
+  font-size: medium;
+}
+
+.registrationcards {
+  background-color: white;
+  border-radius: 12px; /* Optional: for rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow */
+}
+
+
+.rectext{
+    color: black;
+    font-size: 27px;
+}
+
+.login-image {
+  width: 70%;    
+  
+  height: auto;   
+  display: block;  
+  margin: 0 auto;  
+}
+
+
+.rectexttwo{
+     color: black;
+     font-size: 15px;
+
+
+    
+}

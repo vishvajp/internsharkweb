@@ -1,0 +1,255 @@
+/* Background and main container */
+.profiledetailbackground {
+  background-image: url(../Images/dotted-world-map-white-background_132079-967.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+/* Profile sections */
+.profile-section {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+/* Section titles */
+.section-title {
+  color: #007bff;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 0.5rem;
+}
+
+.subsection-title {
+  color: #01cdcd;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Profile image */
+.profile-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 4px solid #007bff;
+}
+
+/* Summary cards */
+.summary-card {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Detail items */
+.detail-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f8f9fa;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-icon {
+  font-size: 1.1rem;
+  width: 20px;
+  display: inline-block;
+}
+
+.detail-label {
+  color: #495057;
+  font-weight: 600;
+}
+
+.detail-value {
+  color: #6c757d;
+}
+
+/* Document sections */
+.document-section {
+  background: #f8f9fa;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Upload boxes */
+.upload-box {
+  border: 2px dashed #007bff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.upload-box:hover {
+  border-color: #0056b3;
+  background: #f8f9fa;
+  transform: translateY(-1px);
+}
+
+/* File selected state */
+.file-selected {
+  text-align: center;
+  padding: 1rem;
+  background: #d4edda;
+  border-radius: 8px;
+  border: 1px solid #c3e6cb;
+}
+
+/* Project description */
+.project-description {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  min-height: 100px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Professional links */
+.professional-links a {
+  color: #007bff;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.professional-links a:hover {
+  color: #0056b3;
+  text-decoration: underline !important;
+}
+
+/* Legacy styles for compatibility */
+.profileupdatecard {
+  background-color: gainsboro;
+  border-radius: 20px;
+}
+
+.studentprofileimg {
+  width: 50%;
+  height: 78px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.profileicons {
+  font-size: 18px;
+}
+
+.downloadicon {
+  color: #0058c5;
+}
+
+.uploadcvbox {
+  border: 1px dotted #0058c5;
+  border-radius: 20px;
+}
+
+/* Print styles */
+@media print {
+  .btn,
+  .no-print {
+    display: none !important;
+  }
+
+  .profile-section {
+    box-shadow: none !important;
+    border: 1px solid #ccc !important;
+    page-break-inside: avoid;
+  }
+
+  .summary-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt !important;
+  }
+
+  .section-title {
+    color: #000 !important;
+  }
+
+  .profiledetailbackground {
+    background: white !important;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .profile-section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    justify-content: center;
+  }
+
+  .profile-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .summary-card {
+    margin-bottom: 1rem;
+  }
+
+  .document-section {
+    padding: 1rem;
+  }
+
+  .upload-box {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .summary-card h6 {
+    font-size: 0.9rem;
+  }
+
+  .summary-card small {
+    font-size: 0.75rem;
+  }
+
+  .detail-icon {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1rem;
+  }
+}

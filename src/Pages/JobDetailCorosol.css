@@ -1,0 +1,122 @@
+
+/* .industriesimage{
+    width: 50px;
+} */
+
+
+
+.companiesdetailcorosolbox{
+  border: 1px solid #01cdcd;
+}
+
+
+.filterjob{
+  background-color: #01cdcd;
+  margin-top: 25px;
+  &:hover{
+     background-color: #01cdcd;
+  }
+  &:active{
+    background-color: #01cdcd;
+  }
+}
+
+
+.img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  background-color: #fff;
+  overflow: hidden;
+  text-align: center;
+}
+.img label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 12px;
+ 
+  
+  
+}
+.industriesimage {
+  max-width: 100%;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+
+.selected-industry {
+  /* Background & Border */
+  background-color: #f0f9ff;  /* Lighter, more modern blue */
+  border: 2px solid #3b82f6 !important; /* Brighter blue border */
+  border-radius: 8px; /* Slightly rounded corners */
+  
+  /* Visual Effects */
+  /* transform: scale(1.05); */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2); /* Blue-tinted shadow */
+  
+  /* Transition */
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
+  
+  /* Layout */
+  z-index: 20;
+  position: relative; /* Needed for proper z-index */
+  
+  /* Text Styling */
+  color: #1d4ed8; /* Darker blue text */
+  font-weight: 600;
+ 
+}
+
+/* Hover state for all items */
+.img.text-center.border.rounded.p-2 {
+  transition: all 0.2s ease;
+}
+
+.img.text-center.border.rounded.p-2:hover {
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Image styling within selected item */
+.selected-industry .industriesimage {
+  filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
+}
+
+/* Label styling */
+.selected-industry label {
+  font-weight: 700;
+  color: #1e40af;
+  text-shadow: 0 1px 2px rgba(59, 130, 246, 0.2);
+}
+
+@media (max-width: 768px) {
+  .indutryboxincorosol {
+    width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .carousel-container .react-multi-carousel-item {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .indutryboxincorosol {
+    width: 250px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+ 
+}

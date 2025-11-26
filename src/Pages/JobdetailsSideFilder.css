@@ -1,0 +1,134 @@
+.search-icon {
+  color: black;
+  font-size: 1rem; /* adjust size if needed */
+}
+
+.job-detail-container {
+  scrollbar-color: #dee2e6 transparent;
+}
+
+.job-detail-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.job-detail-container::-webkit-scrollbar-thumb {
+  background-color: #dee2e6;
+  border-radius: 3px;
+}
+
+.job-card {
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.job-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  border-left-color: var(--bs-primary);
+}
+
+.empty-state {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .job-card {
+    padding: 1rem !important;
+  }
+  
+  .company-logo {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+
+/* For mobile/tablet view */
+/* For mobile filter toggle */
+/* Filter container styling */
+.filter-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  /* height: 464px; */
+}
+/* Custom border color for Ant Design Select */
+.custom-select-wrapper .ant-select-selector {
+  border-color: #01cdcd !important;
+  box-shadow: none; /* optional: remove blue focus shadow */
+}
+
+/* Optional: on focus (when clicked) */
+.custom-select-wrapper .ant-select-focused .ant-select-selector {
+  border-color: #01cdcd !important;
+  box-shadow: 0 0 0 2px rgba(1, 205, 205, 0.2); /* subtle glow */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 991px) {
+  .filter-container {
+    position: fixed;
+    top: 21%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    opacity: 0;
+    padding: 20px;
+    background: white;
+    border-radius: 0;
+  }
+
+  .filter-container.mobile-visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .filter-header {
+    padding-top: 10px;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 992px) {
+  .filter-container {
+    position: sticky;
+    top: 20px;
+  }
+}
+
+
+
+/* Filter sections */
+.filter-section {
+  margin-bottom: 1.5rem;
+}
+
+.filter-section label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Antd select customization */
+.ant-select-selector {
+  border-radius: 6px !important;
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Loading spinner */
+.ant-spin {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+
+@media (max-width: 768px){
+  .filter-container {
+     top: 22% !important;
+    }
+}

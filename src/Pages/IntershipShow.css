@@ -1,0 +1,41 @@
+.intershipcard{
+    /* height: 395px; */
+    
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+.rolltext{
+    font-weight: bold;
+    color: #01cdcd;
+}
+.logo-wrapper {
+  background-color: #e8e8e8;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.company-logo {
+  max-height: 80px;
+  object-fit: contain;
+}
+.jobdescription{
+    font-size: 18px;
+}
+
+
+
+.intershipcard .rolltext {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .intershipcard .rolltext {
+    font-size: 1.25rem;
+  }
+  .intershipcard p.jobdescription {
+    font-size: 0.95rem;
+  }
+}

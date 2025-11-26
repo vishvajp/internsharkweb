@@ -1,0 +1,25 @@
+
+.jobdetailheaderbox {
+  background-color: var(--background-light);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.jobdetailpagebackground {
+  background-color: var(--primary-color-three);
+}
+
+.companylogcentersmallbox {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
+}
+.jobdetailfulllogoimage {
+  padding: 10px;
+}
+
+.company-logo {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+}

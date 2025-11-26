@@ -1,0 +1,15 @@
+.companiesdetailcorosolbox {
+  background-color: var(--primary-color-two);
+  border-radius: 20px;
+  
+}
+.sidefilterouterbox{
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); 
+  border-radius: 10px; 
+  background-color: #fff;
+}
+
+.centerjobshowboxouter{
+  box-shadow: 0 1px 12px rgba(175, 148, 148, 0.1); 
+  border-radius: 10px; 
+}
