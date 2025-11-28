@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StudentRegistration from "./StudentRegistration";
 import EducationDetails from "./EducationDetails";
+import KYCVerification from "./KYCVerification";
 import axios from "axios";
 
 const Studentregistermultistep = () => {
@@ -91,6 +92,14 @@ const Studentregistermultistep = () => {
           formData={formData}
           setFormData={setFormData}
           handleChange={handleChange}
+          prevStep={prevStep}
+          nextStep={nextStep}
+        />
+      )}
+      {step === 3 && (
+        <KYCVerification
+          formData={formData}
+          setFormData={setFormData}
           prevStep={prevStep}
         />
       )}

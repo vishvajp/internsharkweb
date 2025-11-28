@@ -645,6 +645,163 @@ const UserProfileDetail = () => {
             </div>
           </div>
 
+          {/* KYC Documents Section */}
+          {(detail.studentAdhar || detail.studentId) && (
+            <div className="profile-section mb-4">
+              <h4 className="section-title">
+                <MdOutlineDomainVerification className="me-2" /> KYC Documents
+              </h4>
+              <div className="row">
+                {/* Aadhar Card */}
+                {detail.studentAdhar && detail.studentAdhar.length > 0 && (
+                  <div className="col-12 mb-4">
+                    <h5 className="subsection-title mb-3">
+                      <MdOutlineDomainVerification className="me-2" /> Aadhar
+                      Card
+                    </h5>
+                    <div className="row g-3">
+                      {detail.studentAdhar[0] && (
+                        <div className="col-md-6">
+                          <div className="document-card p-3">
+                            <label className="form-label fw-semibold text-muted small">
+                              Front Side
+                            </label>
+                            <img
+                              src={`${imgurl}/${detail.studentAdhar[0]}`}
+                              alt="Aadhar Front"
+                              className="img-fluid rounded shadow-sm"
+                              style={{
+                                maxHeight: "200px",
+                                objectFit: "contain",
+                                width: "100%",
+                              }}
+                              onError={(e) => {
+                                e.target.src = sample;
+                              }}
+                            />
+                            <a
+                              href={`${imgurl}/${detail.studentAdhar[0]}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline-primary btn-sm mt-2 w-100"
+                            >
+                              <FaDownload className="me-2" />
+                              View Full Size
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                      {detail.studentAdhar[1] && (
+                        <div className="col-md-6">
+                          <div className="document-card p-3">
+                            <label className="form-label fw-semibold text-muted small">
+                              Back Side
+                            </label>
+                            <img
+                              src={`${imgurl}/${detail.studentAdhar[1]}`}
+                              alt="Aadhar Back"
+                              className="img-fluid rounded shadow-sm"
+                              style={{
+                                maxHeight: "200px",
+                                objectFit: "contain",
+                                width: "100%",
+                              }}
+                              onError={(e) => {
+                                e.target.src = sample;
+                              }}
+                            />
+                            <a
+                              href={`${imgurl}/${detail.studentAdhar[1]}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline-primary btn-sm mt-2 w-100"
+                            >
+                              <FaDownload className="me-2" />
+                              View Full Size
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* ID Card */}
+                {detail.studentId && detail.studentId.length > 0 && (
+                  <div className="col-12 mb-4">
+                    <h5 className="subsection-title mb-3">
+                      <MdOutlineDomainVerification className="me-2" /> ID Card
+                    </h5>
+                    <div className="row g-3">
+                      {detail.studentId[0] && (
+                        <div className="col-md-6">
+                          <div className="document-card p-3">
+                            <label className="form-label fw-semibold text-muted small">
+                              Front Side
+                            </label>
+                            <img
+                              src={`${imgurl}/${detail.studentId[0]}`}
+                              alt="ID Front"
+                              className="img-fluid rounded shadow-sm"
+                              style={{
+                                maxHeight: "200px",
+                                objectFit: "contain",
+                                width: "100%",
+                              }}
+                              onError={(e) => {
+                                e.target.src = sample;
+                              }}
+                            />
+                            <a
+                              href={`${imgurl}/${detail.studentId[0]}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline-primary btn-sm mt-2 w-100"
+                            >
+                              <FaDownload className="me-2" />
+                              View Full Size
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                      {detail.studentId[1] && (
+                        <div className="col-md-6">
+                          <div className="document-card p-3">
+                            <label className="form-label fw-semibold text-muted small">
+                              Back Side
+                            </label>
+                            <img
+                              src={`${imgurl}/${detail.studentId[1]}`}
+                              alt="ID Back"
+                              className="img-fluid rounded shadow-sm"
+                              style={{
+                                maxHeight: "200px",
+                                objectFit: "contain",
+                                width: "100%",
+                              }}
+                              onError={(e) => {
+                                e.target.src = sample;
+                              }}
+                            />
+                            <a
+                              href={`${imgurl}/${detail.studentId[1]}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn btn-outline-primary btn-sm mt-2 w-100"
+                            >
+                              <FaDownload className="me-2" />
+                              View Full Size
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Additional Information */}
           {(detail.studcityname ||
             detail.studstatename ||

@@ -501,107 +501,19 @@ const EducationDetails = ({
   //   }
   // };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.cv) {
-      alert("Please upload your resume before continuing");
+      Swal.fire({
+        icon: "warning",
+        title: "Resume Required",
+        text: "Please upload your resume before continuing",
+      });
       return;
     }
-    setSubmitting(true);
-
-    const formObject = new FormData();
-    formObject.append("studname", formData.Name);
-    formObject.append("studgender", formData.gender);
-    formObject.append("studdob", formData.dob);
-    formObject.append("studemail", formData.email);
-    formObject.append("studmobileno", formData.phoneNumber);
-    formObject.append("studentaddress", formData.addressLine1);
-    formObject.append("studhighschollname", formData.highschoolname);
-    formObject.append("studprogramminglang", formData.programlag);
-    formObject.append(
-      "studentsecondaryschoolname",
-      formData.secondaryschoolname
-    );
-    formObject.append("studentdegree", formData.degree);
-    formObject.append("studentfieldofstudy", formData.fieldofstudy);
-    formObject.append("studcollegelocation", formData.college_location);
-    formObject.append("studcollegestartyear", formData.startdate);
-    if (formData.passedout) {
-      formObject.append("studcollegeendyear", formData.passedout);
-    }
-    formObject.append("studentcollegename", formData.college);
-    formObject.append("studprojectdecription", formData.projectdescription);
-    formObject.append("studhighschoolpercentage", formData.highschoolper);
-    formObject.append("studhighschoollocation", formData.hslocation);
-    formObject.append(
-      "studentsecondaryschoolpercentage",
-      formData.secondaryschollper
-    );
-    formObject.append("studsecondaryschoollocation", formData.sslocation);
-
-    if (formData.profile) {
-      formObject.append("studprofile", formData.profile);
-    }
-    formObject.append("studentresume", formData.cv);
-    if (formData.coverletter) {
-      formObject.append("studentcoverletter", formData.coverletter);
-    }
-    if (formData.certificate) {
-      formObject.append("studentcertificate", formData.certificate);
-    }
-
-    try {
-      const response = await studentRegister(formObject);
-
-      console.log("student register detail", response);
-      if (response.message === "Student registered successfully") {
-        localStorage.setItem("token", response.studtoken);
-        localStorage.setItem("stuid", response.student.id);
-
-        // Success alert
-        Swal.fire({
-          title: "Success!",
-          text: "Student registration successful!",
-          icon: "success",
-          confirmButtonColor: "#3085d6",
-          timer: 2000,
-        });
-
-        setTimeout(() => {
-          navigate("/interships");
-        }, 2000);
-      } else {
-        localStorage.removeItem("token");
-        localStorage.removeItem("stuid");
-        localStorage.removeItem("recruiter_token");
-        localStorage.removeItem("recid");
-
-        // Error alert
-        Swal.fire({
-          title: "Error!",
-          text: "Registration failed. Please try again.",
-          icon: "error",
-          confirmButtonColor: "#3085d6",
-        });
-      }
-    } catch (error) {
-      console.error("Submit error:", error);
-
-      // Error alert
-      Swal.fire({
-        title: "Error!",
-        text: error.message || "An error occurred during registration.",
-        icon: "error",
-        confirmButtonColor: "#3085d6",
-      });
-
-      localStorage.removeItem("token");
-      localStorage.removeItem("stuid");
-      localStorage.removeItem("recruiter_token");
-      localStorage.removeItem("recid");
-    } finally {
-      setSubmitting(false);
-    }
+    // Proceed to next step (KYC Verification)
+    nextStep();
+    window.scroll(0, 0);
   };
 
   return (
@@ -1185,7 +1097,7 @@ const EducationDetails = ({
                       type="file"
                       name="cv"
                       id="cvUploadInput"
-                      accept=".pdf,.doc,.docx,.txt"
+                      accept=".pdf"
                       onChange={handleChange}
                       className="form-control"
                       style={{
@@ -1199,6 +1111,10 @@ const EducationDetails = ({
                       required
                     />
                   </div>
+
+                  <p className="text-muted">
+                    Supports <strong>PDF files only</strong>
+                  </p>
                   {formData.cv && (
                     <p className="mt-2 text-success">
                       Selected file: {formData.cv.name}
@@ -1266,12 +1182,8 @@ const EducationDetails = ({
                 >
                   Back
                 </button>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={submitting}
-                >
-                  {submitting ? "Submitting..." : "Submit"}
+                <button type="submit" className="btn btn-primary">
+                  Next
                 </button>
               </div>
             </form>

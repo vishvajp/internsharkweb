@@ -1,6 +1,6 @@
 {
   "name": "internsharks",
-  "homepage": "https://internsharks.ai/",
+  "homepage": "https://tsitfilemanager.in/vishva/internsharks",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,6 +27,7 @@
     "react-select": "^5.10.1",
     "react-select-country-list": "^2.2.3",
     "react-slick": "^0.30.3",
+    "recharts": "^3.5.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.19",
     "sweetalert2": "^11.22.2",

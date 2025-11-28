@@ -246,6 +246,16 @@ const RecruiterActions = () => {
                             </span>{" "}
                             {item.job.requiredskills}
                           </div>
+                          <div>
+                            {item.status === "Selected" && (
+                              <span>
+                                {" "}
+                                <b>
+                                  Please check the internship syllabus inside
+                                </b>
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 /* Background and main container */
 .profiledetailbackground {
-  background-image: url(../Images/dotted-world-map-white-background_132079-967.jpg);
+  /* background-image: url(../Images/dotted-world-map-white-background_132079-967.jpg); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -204,6 +204,25 @@
   .profiledetailbackground {
     background: white !important;
   }
+}
+
+/* KYC Document cards */
+.document-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.document-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.document-card img {
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
 }
 
 /* Responsive design */

@@ -1,6 +1,6 @@
 .recruiterprofiledetailbackground {
   background-image: url("../Images//Discover\ Icon\ 3.jpg");
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;

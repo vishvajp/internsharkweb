@@ -27,6 +27,8 @@ import AllAppliedjobsByStudent from "./Pages/AllAppliedjobsByStudent";
 import RecruiterActions from "./Pages/RecruiterActions";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import TermsandCondition from "./Pages/TermsandCondition";
+import ResumeAnalyzer from "./Pages/ResumeAnalyzer";
+import PdfGenerator from "./Pages/PdfGenerator";
 
 function App() {
   return (
@@ -96,6 +98,14 @@ function App() {
       <Route
         path="recruiter-actions"
         element={<RecruiterActions></RecruiterActions>}
+      ></Route>
+      <Route
+        path="/resume-analyzer"
+        element={<ResumeAnalyzer></ResumeAnalyzer>}
+      ></Route>
+      <Route
+        path="/syllabus-generator"
+        element={<PdfGenerator></PdfGenerator>}
       ></Route>
     </Routes>
     // </Router>

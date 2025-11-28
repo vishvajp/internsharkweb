@@ -8,6 +8,9 @@ import { degreeOptions } from "../objects/DegreeObject";
 import { getStates, getDistricts } from "../objects/IndiaLocations";
 import { getrecruiterdetail } from "../service/profileupdate";
 import { useNavigate } from "react-router-dom";
+import { FaFilePdf } from "react-icons/fa";
+
+import axios from "axios";
 
 const RecruiterJobPost = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -16,6 +19,31 @@ const RecruiterJobPost = () => {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // PDF Generation states
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+  const [pdfGenerated, setPdfGenerated] = useState(false);
+  const [generatedPdfId, setGeneratedPdfId] = useState(null);
+  const [pdfDownloadLinks, setPdfDownloadLinks] = useState([]);
+  const [loadingMessage, setLoadingMessage] = useState("");
+
+  // Track the values used for PDF generation
+  const [pdfGeneratedWith, setPdfGeneratedWith] = useState({
+    role: "",
+    skill: "",
+    duration: "",
+  });
+
+  // Loading messages for PDF generation
+  const loadingMessages = [
+    "AI analyzing internship requirements...",
+    "Generating course syllabus...",
+    "Creating week-by-week curriculum...",
+    "Structuring learning modules...",
+    "Designing practical assignments...",
+    "Finalizing course materials...",
+    "Preparing PDF documents...",
+  ];
 
   // Field of study mapping (same as EducationDetails)
   const extraBranches = [
@@ -334,6 +362,50 @@ const RecruiterJobPost = () => {
     fetchCompanyDetails();
   }, []);
 
+  // Cycle through loading messages during PDF generation
+  useEffect(() => {
+    let messageInterval;
+
+    if (isGeneratingPdf) {
+      let currentIndex = 0;
+      setLoadingMessage(loadingMessages[0]);
+
+      messageInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % loadingMessages.length;
+        setLoadingMessage(loadingMessages[currentIndex]);
+      }, 5000); // Change message every 5 seconds
+    }
+
+    return () => {
+      if (messageInterval) {
+        clearInterval(messageInterval);
+      }
+    };
+  }, [isGeneratingPdf]);
+
+  // Detect changes in role, skill, or duration after PDF generation
+  useEffect(() => {
+    if (pdfGenerated) {
+      const hasChanged =
+        formData.company_role_name !== pdfGeneratedWith.role ||
+        formData.intern_description !== pdfGeneratedWith.skill ||
+        formData.internship_duration !== pdfGeneratedWith.duration;
+
+      if (hasChanged) {
+        // Reset PDF generation state to allow regeneration
+        setPdfGenerated(false);
+        setGeneratedPdfId(null);
+        setPdfDownloadLinks([]);
+      }
+    }
+  }, [
+    formData.company_role_name,
+    formData.intern_description,
+    formData.internship_duration,
+    pdfGenerated,
+    pdfGeneratedWith,
+  ]);
+
   //set values to formdata
 
   // const handleChange = (e) => {
@@ -358,6 +430,72 @@ const RecruiterJobPost = () => {
       ...prev,
       [name]: files ? files[0] : value,
     }));
+  };
+
+  // Generate PDF function
+  const handleGeneratePdf = async () => {
+    // Validate required fields
+    if (
+      !formData.company_role_name ||
+      !formData.intern_description ||
+      !formData.internship_duration
+    ) {
+      alert(
+        "Please fill in Role, Skills, and Internship Duration before generating PDF"
+      );
+      return;
+    }
+
+    // Extract internship duration in months
+    const durationMatch = formData.internship_duration.match(/(\d+)/);
+    const internshipMonths = durationMatch ? parseInt(durationMatch[0]) : 1;
+
+    setIsGeneratingPdf(true);
+
+    try {
+      const BASE_URL = process.env.REACT_APP_API_BASE_URL_MONGO;
+      const recruiter_token = localStorage.getItem("recruiter_token");
+
+      const response = await axios.post(
+        `${BASE_URL}/syllabus/generate`,
+        {
+          role: formData.company_role_name,
+          skill: formData.intern_description,
+          internshipmonth: internshipMonths,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${recruiter_token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.success) {
+        setPdfGenerated(true);
+        setGeneratedPdfId(response.data.id);
+        setPdfDownloadLinks(response.data.download_links || []);
+
+        // Save the values used for this PDF generation
+        setPdfGeneratedWith({
+          role: formData.company_role_name,
+          skill: formData.intern_description,
+          duration: formData.internship_duration,
+        });
+
+        alert("PDF generated successfully! You can now post the internship.");
+      } else {
+        throw new Error("PDF generation failed");
+      }
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert(
+        error.response?.data?.message ||
+          "Failed to generate PDF. Please try again."
+      );
+    } finally {
+      setIsGeneratingPdf(false);
+    }
   };
 
   // const handleSubmit = async (e) => {
@@ -426,6 +564,13 @@ const RecruiterJobPost = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if PDF is generated
+    if (!pdfGenerated || !generatedPdfId) {
+      alert("Please generate PDF before posting the internship");
+      return;
+    }
+
     setIsSubmitting(true);
 
     // ✅ Create FormData object
@@ -450,6 +595,9 @@ const RecruiterJobPost = () => {
     formObject.append("internshipduration", formData.internship_duration);
     formObject.append("internshipstipend", formData.intern_stipend);
     formObject.append("aboutinternship", formData.about_internship);
+
+    // ✅ Add the generated PDF ID
+    formObject.append("coursePdf", generatedPdfId);
 
     try {
       // ✅ Pass FormData to recruiterpostjob
@@ -488,6 +636,11 @@ const RecruiterJobPost = () => {
         setSelectedDegree("");
         setSelectedState("");
         setSelectedDistrict("");
+
+        // Reset PDF states
+        setPdfGenerated(false);
+        setGeneratedPdfId(null);
+        setPdfDownloadLinks([]);
       }
     } catch (error) {
       console.error("❌ Error while posting job:", error);
@@ -882,27 +1035,120 @@ const RecruiterJobPost = () => {
                 </div>
               </div>
             </div>
+            {/* Dynamic Loading Message */}
+            {isGeneratingPdf && (
+              <div className="mt-3 p-3 bg-light rounded border border-primary">
+                <div className="d-flex align-items-center">
+                  <div
+                    className="spinner-border text-primary me-3"
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                  <div>
+                    <p className="mb-0 fw-bold text-primary">
+                      {loadingMessage}
+                    </p>
+                    <small className="text-muted">
+                      This may take a few moments...
+                    </small>
+                  </div>
+                </div>
+              </div>
+            )}
 
-            {/* Submit Button */}
-            <div className="mt-5">
-              <button
-                type="submit"
-                className="btn btn-primary px-4 py-2"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? (
-                  <>
-                    <span
-                      className="spinner-border spinner-border-sm me-2"
-                      role="status"
-                      aria-hidden="true"
-                    ></span>
-                    Posting...
-                  </>
-                ) : (
-                  "Post Internship"
-                )}
-              </button>
+            {/* PDF Download Links */}
+            {pdfGenerated && pdfDownloadLinks.length > 0 && (
+              <div className="mt-4 mb-4">
+                <div className="card shadow-sm border-0 rounded-4 p-4">
+                  <h5 className="fw-bold mb-3 text-primary">
+                    <i className="bi bi-check-circle-fill me-2"></i>
+                    Course Materials Generated
+                  </h5>
+                  <div className="list-group">
+                    {pdfDownloadLinks.map((link, index) => (
+                      <a
+                        key={index}
+                        href={link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="list-group-item list-group-item-action d-flex align-items-center p-3 mb-2 rounded"
+                        style={{ border: "2px solid #e9ecef" }}
+                      >
+                        <FaFilePdf className="text-danger fs-3 me-3" />
+                        <div className="flex-grow-1">
+                          <h6 className="mb-1 fw-bold">
+                            Week {index + 1} Course Material
+                          </h6>
+                          <small className="text-muted">
+                            Click to download or view
+                          </small>
+                        </div>
+                        <i className="bi bi-download fs-5 text-primary"></i>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Generate PDF and Submit Buttons */}
+            <div className="mt-3">
+              <div className="d-flex gap-3 align-items-center">
+                {/* Generate PDF Button */}
+                <button
+                  type="button"
+                  className={`btn ${
+                    pdfGenerated ? "btn-success" : "btn-warning"
+                  } px-4 py-2`}
+                  onClick={handleGeneratePdf}
+                  disabled={isGeneratingPdf || pdfGenerated}
+                >
+                  {isGeneratingPdf ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Generating Syllabus...
+                    </>
+                  ) : pdfGenerated ? (
+                    <>✓ Syllabus Generated</>
+                  ) : (
+                    "Generate Syllabus"
+                  )}
+                </button>
+
+                {/* Post Internship Button */}
+                <button
+                  type="submit"
+                  className="btn btn-primary px-4 py-2"
+                  disabled={isSubmitting || !pdfGenerated}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span
+                        className="spinner-border spinner-border-sm me-2"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Posting...
+                    </>
+                  ) : (
+                    "Post Internship"
+                  )}
+                </button>
+              </div>
+
+              {/* Helper Text */}
+              {!pdfGenerated && !isGeneratingPdf && (
+                <p className="text-muted mt-2 mb-0">
+                  <small>
+                    * Please generate Syllabus before posting the internship
+                  </small>
+                </p>
+              )}
             </div>
           </form>
         </div>
