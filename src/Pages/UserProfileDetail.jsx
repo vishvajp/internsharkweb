@@ -21,7 +21,7 @@ import {
   MdOutlineDateRange,
   MdOutlineDomainVerification,
   MdFileCopy,
-  MdLocalPhone,
+  // MdLocalPhone,
 } from "react-icons/md";
 import { IoLogoGithub, IoLogoLinkedin, IoGlobe } from "react-icons/io5";
 import { BsCloudUploadFill } from "react-icons/bs";
