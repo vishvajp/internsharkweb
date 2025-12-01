@@ -99,14 +99,14 @@ function App() {
         path="recruiter-actions"
         element={<RecruiterActions></RecruiterActions>}
       ></Route>
-      <Route
+      {/* <Route
         path="/resume-analyzer"
         element={<ResumeAnalyzer></ResumeAnalyzer>}
       ></Route>
       <Route
         path="/syllabus-generator"
         element={<PdfGenerator></PdfGenerator>}
-      ></Route>
+      ></Route> */}
     </Routes>
     // </Router>
   );

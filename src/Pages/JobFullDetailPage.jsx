@@ -9,7 +9,7 @@ import { FaGraduationCap } from "react-icons/fa";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ApplicationStatusModal from "./ApplicationStatusModal";
 import { getjobdetailbyid, applyjobbyid } from "../service/job";
-import { FaFilePdf } from "react-icons/fa";
+
 const JobFullDetailPage = () => {
   const { internship_id } = useParams();
 
@@ -171,8 +171,6 @@ const JobFullDetailPage = () => {
       setApplying(false);
     }
   };
-
-  console.log("Course PDF:", jobDetail?.coursePdf);
 
   return (
     <div>
@@ -387,30 +385,6 @@ const JobFullDetailPage = () => {
                 </div>
               </div>
             </div>
-            {jobDetail?.coursePdf && jobDetail.coursePdf.length > 0 && (
-              <div className="container pt-0">
-                <div className="row jobdetailheaderbox p-4">
-                  <strong className="mb-3">Course Materials</strong>
-                  <ul className="list-unstyled">
-                    {jobDetail.coursePdf.map((link, index) => (
-                      <li key={index} className="mb-2">
-                        <a
-                          href={link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="d-flex align-items-center gap-2 text-decoration-none"
-                        >
-                          <FaFilePdf className="text-danger fs-5" />
-                          <span className="fw-medium">
-                            Week {index + 1} PDF
-                          </span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            )}
           </div>
         ) : (
           <div className="container py-5">

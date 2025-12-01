@@ -6,7 +6,6 @@ import { BsCloudUploadFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { studentRegister } from "../service/profilelogin";
-import axios from "axios";
 
 const KYCVerification = ({ formData, prevStep }) => {
   const navigate = useNavigate();
@@ -15,7 +14,6 @@ const KYCVerification = ({ formData, prevStep }) => {
   const [aadharBack, setAadharBack] = useState(null);
   const [idFront, setIdFront] = useState(null);
   const [idBack, setIdBack] = useState(null);
-  const BASE_URL_MONGO = process.env.REACT_APP_API_BASE_URL_MONGO;
 
   const handleFileChange = (e, setter) => {
     const file = e.target.files[0];
@@ -50,48 +48,6 @@ const KYCVerification = ({ formData, prevStep }) => {
     if (input) {
       input.value = "";
       input.click();
-    }
-  };
-
-  // Function to analyze resume and navigate to ResumeAnalyzer page
-  const analyzeResumeAndNavigate = async (resumeFile) => {
-    try {
-      const formData = new FormData();
-      formData.append("resume", resumeFile);
-
-      const response = await axios.post(
-        `${BASE_URL_MONGO}/resume/analyze`,
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
-
-      const analysis = response.data.analysis;
-
-      // Close the loader
-      Swal.close();
-
-      // Navigate to ResumeAnalyzer page with analysis data
-      navigate("/resume-analyzer", {
-        state: {
-          analysis: analysis,
-          fromRegistration: true,
-        },
-      });
-    } catch (error) {
-      console.error("Resume analysis error:", error);
-      // Close the loader
-      Swal.close();
-
-      // If resume analysis fails, still navigate to dashboard
-      Swal.fire({
-        title: "Notice",
-        text: "Resume analysis is currently unavailable. Proceeding to dashboard.",
-        icon: "info",
-        confirmButtonColor: "#0346FA",
-        timer: 2000,
-      }).then(() => {
-        navigate("/interships");
-      });
     }
   };
 
@@ -183,19 +139,19 @@ const KYCVerification = ({ formData, prevStep }) => {
         localStorage.setItem("token", response.studtoken);
         localStorage.setItem("stuid", response.student.id);
 
-        // Update loader message for resume analysis
-        Swal.update({
-          title: "Registration Successful!",
-          html: "Analyzing your resume, please wait...",
-        });
+        // Close loader and show success
+        Swal.close();
 
-        // Automatically analyze resume and navigate to ResumeAnalyzer page
-        if (formData.cv) {
-          await analyzeResumeAndNavigate(formData.cv);
-        } else {
-          Swal.close();
+        Swal.fire({
+          title: "Success!",
+          text: "Student registration successful!",
+          icon: "success",
+          confirmButtonColor: "#3085d6",
+          timer: 2000,
+          showConfirmButton: false,
+        }).then(() => {
           navigate("/interships");
-        }
+        });
       } else {
         localStorage.removeItem("token");
         localStorage.removeItem("stuid");

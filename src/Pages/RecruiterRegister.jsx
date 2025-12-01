@@ -4,6 +4,7 @@ import Footer from "../Layouts/Footer";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { studentEmailVerify, emailverify } from "../service/profilelogin";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const RecruiterRegister = ({
   formData,
@@ -56,7 +57,72 @@ const RecruiterRegister = ({
       }
     } catch (error) {
       console.error("Error sending OTP:", error);
-      alert("Something went wrong while sending OTP.");
+
+      // Check if email already exists
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        const errorMessage = error.response.data.message;
+
+        if (
+          errorMessage.includes("already exists") ||
+          errorMessage.includes("already registered")
+        ) {
+          // Allow re-verification for existing email
+          Swal.fire({
+            title: "Email Already Registered",
+            text: "This email is already registered. Click 'Re-verify' to verify your email again.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Re-verify Email",
+            cancelButtonText: "Cancel",
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              // Force send OTP for re-verification
+              try {
+                const retryResponse = await studentEmailVerify({
+                  email: formData.recruiter_email,
+                  name: formData.recruiter_name || "Provider",
+                  userType: "recruiter",
+                  forceResend: true,
+                });
+
+                if (retryResponse.message === "OTP sent to email") {
+                  Swal.fire({
+                    title: "Success",
+                    text: "OTP sent successfully! Kindly check your Inbox/Spam folder",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                  });
+                  setOtpSent(true);
+                  setShowOtp(true);
+                }
+              } catch (retryError) {
+                console.error("Error resending OTP:", retryError);
+                Swal.fire({
+                  title: "Error",
+                  text: "Failed to send OTP. Please try again.",
+                  icon: "error",
+                  confirmButtonColor: "#3085d6",
+                });
+              }
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "Error",
+            text: errorMessage,
+            icon: "error",
+            confirmButtonColor: "#3085d6",
+          });
+        }
+      } else {
+        alert("Something went wrong while sending OTP.");
+      }
     } finally {
       setIsSendingOtp(false);
     }
@@ -94,7 +160,7 @@ const RecruiterRegister = ({
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!isEmailVerified) {
@@ -102,8 +168,55 @@ const RecruiterRegister = ({
       return;
     }
 
-    nextStep();
-    window.scrollTo(0, 0);
+    // Check if email or mobile already exists
+    try {
+      const BASE_URL_MONGO = process.env.REACT_APP_API_BASE_URL_MONGO;
+      const response = await axios.post(
+        `${BASE_URL_MONGO}/student/checkExistence`,
+        {
+          email: formData.recruiter_email,
+          mobileNo: formData.recruiter_phone,
+        }
+      );
+
+      // If we get here without error, proceed to next step
+      nextStep();
+      window.scrollTo(0, 0);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        const { message } = error.response.data;
+
+        // If email exists, suggest re-verification
+        if (message.includes("email") || message.includes("Email")) {
+          Swal.fire({
+            icon: "warning",
+            title: "Email Already Registered",
+            text: message + " Please re-verify your email to continue.",
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: "OK",
+          }).then(() => {
+            // Reset email verification to allow re-verification
+            setIsEmailVerified(false);
+            setShowOtp(false);
+            setOtpSent(false);
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Already Registered",
+            text: message,
+            confirmButtonColor: "#3085d6",
+          });
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Failed to verify registration details. Please try again.",
+          confirmButtonColor: "#3085d6",
+        });
+      }
+    }
   };
 
   return (
